@@ -79,7 +79,7 @@ const CustomTable = ({
           <TableRow>
             <TablePagination
               colSpan={3}
-              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+              rowsPerPageOptions={[20, 50, 100, { label: "All", value: -1 }]}
               count={totalRows}
               rowsPerPage={rowsPerPage}
               page={currentPage}

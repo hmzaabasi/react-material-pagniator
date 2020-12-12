@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 const App = () => {
   const [tableData, setTableData] = useState([]);
   const [apiResponse, setApiResponse] = useState([]);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(20);
   const [page, setPage] = React.useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
@@ -54,12 +54,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    setTableData(pageData());
-  }, [apiResponse]);
-
-  useEffect(() => {
-    setTableData(pageData());
-  }, [page, rowsPerPage]);
+    setTableData(
+      apiResponse.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    );
+  }, [page, rowsPerPage, apiResponse]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -69,9 +67,6 @@ const App = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const pageData = () =>
-    apiResponse.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <>
